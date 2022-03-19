@@ -80,7 +80,7 @@ public class ValidacionDatosService implements IValidacionDatosService {
                 adn[i][j] == adn[i][j + 1] &&
                 adn[i][j] == adn[i][j + 2] &&
                 adn[i][j] == adn[i][j + 3]) {
-            log.info(String.format("validacion horizontal  %s %s %s %s", adn[i][j], adn[i][j + 1], adn[i][j + 2], adn[i][j + 3]));
+//            log.info(String.format("validacion horizontal  %s %s %s %s", adn[i][j], adn[i][j + 1], adn[i][j + 2], adn[i][j + 3]));
             contadorSecuencias++;
         }
         return contadorSecuencias;
@@ -100,7 +100,7 @@ public class ValidacionDatosService implements IValidacionDatosService {
                 adn[i][j] == adn[i + 1][j] &&
                 adn[i][j] == adn[i + 2][j] &&
                 adn[i][j] == adn[i + 3][j]) {
-            log.info(String.format("validacion vertical %s %s %s %s", adn[i][j], adn[i + 1][j], adn[i + 2][j], adn[i + 3][j]));
+//            log.info(String.format("validacion vertical %s %s %s %s", adn[i][j], adn[i + 1][j], adn[i + 2][j], adn[i + 3][j]));
             contadorSecuencias++;
         }
         return contadorSecuencias;
@@ -124,8 +124,8 @@ public class ValidacionDatosService implements IValidacionDatosService {
                     adn[i][j] == adn[i + 3][j + 3]
             ) {
                 contadorSecuencias++;
-                log.info(String.format("validacion diagonal izquierda derecha" +
-                        " %s %s %s %s", adn[i][j], adn[i + 1][j + 1], adn[i + 2][j + 2], adn[i + 3][j + 3]));
+//                log.info(String.format("validacion diagonal izquierda derecha" +
+//                        " %s %s %s %s", adn[i][j], adn[i + 1][j + 1], adn[i + 2][j + 2], adn[i + 3][j + 3]));
             }
             int acumulado = adn.length - 1 - j;
             if (adn[i][acumulado] == adn[i + 1][acumulado - 1] &&
@@ -133,9 +133,9 @@ public class ValidacionDatosService implements IValidacionDatosService {
                     adn[i][acumulado] == adn[i + 3][acumulado - 3]
             ) {
                 contadorSecuencias++;
-                log.info(String.format("validacion diagonal derecha izquierda" +
-                                " %s %s %s %s", adn[i][acumulado], adn[i + 1][acumulado - 1],
-                        adn[i + 2][acumulado - 2], adn[i + 3][acumulado - 3]));
+//                log.info(String.format("validacion diagonal derecha izquierda" +
+//                                " %s %s %s %s", adn[i][acumulado], adn[i + 1][acumulado - 1],
+//                        adn[i + 2][acumulado - 2], adn[i + 3][acumulado - 3]));
                 if (contadorSecuencias > 1)
                     return contadorSecuencias;
             }

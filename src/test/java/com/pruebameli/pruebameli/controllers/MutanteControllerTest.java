@@ -50,7 +50,7 @@ class MutanteControllerTest {
     void badParameters() {
         String url = URL + port + END_POINT;
         ResponseEntity<String> ismutant = this.restTemplate.postForEntity(url, "", String.class);
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, ismutant.getStatusCode());
+        assertEquals(HttpStatus.UNSUPPORTED_MEDIA_TYPE, ismutant.getStatusCode());
     }
 
     /**
@@ -60,10 +60,35 @@ class MutanteControllerTest {
     void isMutantSuccess() {
         String url = URL + port + END_POINT;
         MutantInDto mutantInDto = new MutantInDto();
-        mutantInDto.setDna(new String[]{"ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"});
+        mutantInDto.setDna(new String[]{"ATGCGA", "AAAAGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"});
         ResponseEntity<String> ismutant = this.restTemplate.postForEntity(url, mutantInDto, String.class);
         assertEquals(HttpStatus.OK, ismutant.getStatusCode());
     }
+
+    /**
+     * Validacion dna mutante
+     */
+    @Test
+    void isMutantSuccessSecuenciasDiagonales() {
+        String url = URL + port + END_POINT;
+        MutantInDto mutantInDto = new MutantInDto();
+        mutantInDto.setDna(new String[]{"ATGCGG", "AAAAGC", "TTAGGT", "AGAATG", "CCCTTA", "TCTCTG"});
+        ResponseEntity<String> ismutant = this.restTemplate.postForEntity(url, mutantInDto, String.class);
+        assertEquals(HttpStatus.OK, ismutant.getStatusCode());
+    }
+
+    /**
+     * Validacion dna mutante
+     */
+    @Test
+    void isMutantSuccessSecuenciasDiagonales1() {
+        String url = URL + port + END_POINT;
+        MutantInDto mutantInDto = new MutantInDto();
+        mutantInDto.setDna(new String[]{"ATGCGG", "AAAAGC", "TTAGGT", "ATAATG", "CCTTTA", "TCTCTG"});
+        ResponseEntity<String> ismutant = this.restTemplate.postForEntity(url, mutantInDto, String.class);
+        assertEquals(HttpStatus.OK, ismutant.getStatusCode());
+    }
+
 
     /**
      * Validacion dna no mutante
@@ -85,7 +110,7 @@ class MutanteControllerTest {
     void isBadDnaSuccess() {
         String url = URL + port + END_POINT;
         MutantInDto mutantInDto = new MutantInDto();
-        mutantInDto.setDna(new String[]{"ATGCA", "CCGTGC", "TTATGT", "AGAAGG", "CTCCTA", "TCACTG"});
+        mutantInDto.setDna(new String[]{"ATGCA", "CCGTGC", "TTATGT", "AGAATG", "CTCCTA", "TCACTG"});
         ResponseEntity<String> ismutant = this.restTemplate.postForEntity(url, mutantInDto, String.class);
         assertEquals(HttpStatus.FORBIDDEN, ismutant.getStatusCode());
     }
