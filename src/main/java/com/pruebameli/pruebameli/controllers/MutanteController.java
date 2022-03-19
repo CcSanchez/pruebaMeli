@@ -32,7 +32,6 @@ public class MutanteController {
             example = "[\"ATGCGA\",\"CAGTGC\",\"TTATGT\",\"AGAAGG\",\"CCCCTA\",\"TCACTG\"]", required = true) @RequestBody MutantInDto adn) {
 
         try {
-            log.info(adn.toString());
             if (service.isMutant(adn.getDna()))
                 return ResponseEntity.ok(Constantes.DNA_MUTANTE);
             return new ResponseEntity<>(Constantes.DNA_NO_MUTANTE, HttpStatus.FORBIDDEN);
